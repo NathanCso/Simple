@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+    - name: Assurer que Docker est installé
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Démarrer le service Docker
+      service:
+        name: docker
+        state: started
+
+    - name: Déployer l'application
+      docker_compose:
+        project_src: /app
+        restarted: yes
